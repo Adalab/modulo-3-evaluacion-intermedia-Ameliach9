@@ -45,9 +45,9 @@ return (
 <main>
 <table className="table">
 <thead><tr>
-    <th>Nombre</th>
-    <th>Tutora</th>
-    <th>Especialidad</th>
+    <th className="title">Nombre</th>
+    <th className="title">Tutora</th>
+    <th className="title">Especialidad</th>
 </tr></thead>
 <tbody>
 {renderAdalabers}
