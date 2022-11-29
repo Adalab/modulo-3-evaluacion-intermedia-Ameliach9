@@ -11,27 +11,66 @@ const [newAdalaber, setNewAdalaber] = useState({
   counselor: '',
   speciality:'',
  });
+const [search, setSearch] = useState('');
+const [searchCounselor, setSearchCounselor] = useState ('');
 
 
 ///-----
 
+const selectCounselor = (ev) =>{
+  ev.preventDefault(); 
+  setSearchCounselor(ev.target.value)
+}
+
+const searchAdalaber = (ev) => {
+ ev.preventDefault();
+ setSearch(ev.target.value);
+};
+
 const handleClick =(ev) => {
   ev.preventDefault();
   setData ([...data, newAdalaber])
-
-}
+  setNewAdalaber({
+  name:'',
+  counselor: '',
+  speciality:'',
+  })
+};
 
 const handleNewAdalaber = (ev) =>{
   ev.preventDefault();
   setNewAdalaber ({...newAdalaber, [ev.target.id] : ev.target.value })}
 
-const renderAdalabers = data.map((adalaber) => {
+
+
+const renderAdalabers = data
+
+.filter ((adalaber)=>
+  adalaber.name.toLowerCase().includes(search.toLowerCase())
+)
+
+.filter ((select) =>
+  select.counselor.includes(searchCounselor)
+
+) 
+
+.map((adalaber) => {
 return (
-<tr className="adalaber__info">
+<tr key={adalaber.id} className="adalaber__info">
       <td className="adalaber__name">{adalaber.name}</td>
       <td className="adalaber__tutor">{adalaber.counselor}</td>
       <td className="adalaber__specialty">{adalaber.speciality}</td>
+      <td> 
+        {adalaber.social_networks.map((eachSocial, index) =>{
+          return (
+            <a key={index} href={eachSocial.url} className="socials__adalabers">
+            {`${eachSocial.name}`} 
+            </a>
+            );
+        })}
+      </td>
 </tr>
+//CONCATENA PARA PASAR LA URL A CADA NAME, CREO. PREGUNTAR!!!
 
 );
 });
@@ -43,11 +82,32 @@ return (
   <h1>Adalabers</h1>
 </header>
 <main>
+  <form>
+  <label>
+    <input
+      className="header__search"
+      autoComplete="off"
+      type="search"
+      name="search"
+      placeholder="Filtrar contactos por nombre"
+      onInput={searchAdalaber}
+      value={search}
+    /> 
+    </label>
+<select onChange= {selectCounselor}>
+  <option value="Escoge una opción">Escoge una opción</option>
+  <option value="Dayana">Dayana</option>
+  <option value="Iván">Iván</option>
+  <option value="Yanelis">Yanelis</option>
+  <option value="Miguel">Miguel</option>
+</select>
+</form>
 <table className="table">
 <thead><tr>
     <th className="title">Nombre</th>
     <th className="title">Tutora</th>
     <th className="title">Especialidad</th>
+    <th className="title">Redes Sociales</th>
 </tr></thead>
 <tbody>
 {renderAdalabers}
