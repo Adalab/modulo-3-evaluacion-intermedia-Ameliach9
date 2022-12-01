@@ -17,7 +17,7 @@ const [searchCounselor, setSearchCounselor] = useState ('');
 
 ///-----
 
-const selectCounselor = (ev) =>{
+const selectCounselor = (ev) => {
   ev.preventDefault(); 
   setSearchCounselor(ev.target.value)
 }
@@ -64,13 +64,12 @@ return (
         {adalaber.social_networks.map((eachSocial, index) =>{
           return (
             <a key={index} href={eachSocial.url} className="socials__adalabers">
-            {`${eachSocial.name}`} 
+            {eachSocial.name} 
             </a>
             );
         })}
       </td>
 </tr>
-//CONCATENA PARA PASAR LA URL A CADA NAME, CREO. PREGUNTAR!!!
 
 );
 });
