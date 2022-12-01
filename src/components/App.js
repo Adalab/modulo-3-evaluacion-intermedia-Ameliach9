@@ -30,6 +30,7 @@ const searchAdalaber = (ev) => {
 const handleClick =(ev) => {
   ev.preventDefault();
   setData ([...data, newAdalaber])
+  //al hacer click me borra los datos del input
   setNewAdalaber({
   name:'',
   counselor: '',
